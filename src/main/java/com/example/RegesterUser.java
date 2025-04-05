@@ -1,2 +1,5 @@
-package com.example;public class RegesterUser {
+package com.example;
+
+public class RegesterUser {
+
 }
