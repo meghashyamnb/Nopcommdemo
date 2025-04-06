@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class LoginPage {
-    private WebDriver driver;
+    private final WebDriver driver;
 
     // Constructor: accept a driver from the test
     public LoginPage(WebDriver driver) {
@@ -24,8 +24,7 @@ public class LoginPage {
         selectHome.click();
 
         // Enter a search term
-        WebElement addSearchInfo =
-                driver.findElement(By.xpath("//input[@class='search-box-text ui-autocomplete-input']"));
+        WebElement addSearchInfo = driver.findElement(By.xpath("//input[@class='search-box-text ui-autocomplete-input']"));
         addSearchInfo.sendKeys("Samsung Galaxy S24 256GB");
     }
 }
