@@ -2,11 +2,13 @@ package Search;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.example.AmazonDemo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -27,6 +29,8 @@ public class FindingPriceMobile extends AmazonDemo {
         setupDriver();
         // Optionally, initialize your ExtentReports instance (this is a simple example)
         extent = new ExtentReports();
+        ExtentSparkReporter amazonReporter = new ExtentSparkReporter("src/test/resources/AmazonReport.html");
+        extent.attachReporter(amazonReporter);
         // Navigate to Amazon homepage
         driver.get("https://www.amazon.in/");
         // Initialize an explicit wait (20 seconds)
@@ -82,5 +86,12 @@ public class FindingPriceMobile extends AmazonDemo {
         if (extent != null) {
             extent.flush();
         }
+    }
+
+    @AfterSuite
+    public void tearDownReport() {
+        // Write all the test information to the report
+        extent.flush();
+        System.out.println("Extent report flushed successfully.");
     }
 }
